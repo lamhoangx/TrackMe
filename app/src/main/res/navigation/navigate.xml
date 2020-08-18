@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigate"
+    app:startDestination="@id/main_fragment"
+    tools:ignore="UnusedNavigation">
+
+    <fragment
+        android:id="@+id/main_fragment"
+        android:name="com.lamhx.trackme.ui.fragment.MainFragment"
+        tools:layout="@layout/main_fragment">
+
+        <action
+            android:id="@+id/action_main_fragment_to_track_me_session"
+            app:destination="@id/track_me_session"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/track_me_session"
+        android:name="com.lamhx.trackme.ui.fragment.RecordWorkoutFragment"
+        tools:layout="@layout/record_workout_fragment">
+        <action
+            android:id="@+id/action_track_me_session_to_main_fragment"
+            app:destination="@id/main_fragment" />
+    </fragment>
+</navigation>

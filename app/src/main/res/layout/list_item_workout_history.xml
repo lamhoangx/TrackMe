@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="workoutHistory"
+            type="com.lamhx.trackme.data.WorkoutHistory" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="2dp">
+
+        <LinearLayout
+            android:id="@+id/container_item_history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/map_workout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/history_map_height" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:padding="@dimen/info_padding_map">
+
+                <TextView
+                    android:id="@+id/tv_distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="@dimen/info_min_width"
+                    android:paddingLeft="@dimen/padding_text_info"
+                    android:paddingRight="@dimen/padding_text_info"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/infor_text_size"
+                    app:workoutDistance="@{workoutHistory.component1().distance}" />
+
+                <TextView
+                    android:id="@+id/tv_speed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="@dimen/info_min_width"
+                    android:paddingLeft="@dimen/padding_text_info"
+                    android:paddingRight="@dimen/padding_text_info"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/infor_text_size"
+                    app:workoutDistance="@{workoutHistory.component1().distance}"
+                    app:workoutDuration="@{workoutHistory.component1().duration}" />
+
+                <TextView
+                    android:id="@+id/tv_duration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:minWidth="@dimen/info_min_width"
+                    android:paddingLeft="@dimen/padding_text_info"
+                    android:paddingRight="@dimen/padding_text_info"
+                    android:textSize="@dimen/infor_text_size"
+                    app:workoutDuration="@{workoutHistory.component1().duration}" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

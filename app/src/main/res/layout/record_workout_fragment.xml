@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_recording"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.fragment.MainFragment">
+
+        <fragment
+            android:id="@+id/map_workout"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/frame_info"
+            app:layout_constraintEnd_toEndOf="@+id/frame_info"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/frame_info"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"></fragment>
+
+        <LinearLayout
+            android:id="@+id/frame_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_workout_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/info_distance"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/infor_text_size"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_speed"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_speed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/info_speed"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/infor_text_size"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_duration"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/tv_distance"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_duration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/info_duration_format"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/infor_text_size"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/tv_speed"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ViewSwitcher
+                    android:id="@+id/controller"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/btn_pause"
+                        android:layout_width="@dimen/record_btn_size"
+                        android:layout_height="@dimen/record_btn_size"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/fab_margin"
+                        android:gravity="center"
+                        app:backgroundTint="@color/colorPrimary"
+                        app:fabCustomSize="@dimen/record_btn_size"
+                        app:srcCompat="@drawable/btn_pause"
+                        app:tint="@null" />
+
+                    <LinearLayout
+                        android:id="@+id/on_pause_controller"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_margin="@dimen/fab_margin"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/btn_resume"
+                            android:layout_width="@dimen/record_btn_size"
+                            android:layout_height="@dimen/record_btn_size"
+                            android:layout_gravity="center"
+                            android:layout_margin="@dimen/fab_margin"
+                            android:gravity="center"
+                            app:backgroundTint="@color/colorPrimary"
+                            app:fabCustomSize="@dimen/record_btn_size"
+                            app:srcCompat="@drawable/btn_resume"
+                            app:tint="@null" />
+
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/btn_stop"
+                            android:layout_width="@dimen/record_btn_size_small"
+                            android:layout_height="@dimen/record_btn_size"
+                            android:layout_gravity="center"
+                            android:layout_margin="@dimen/fab_margin"
+                            android:gravity="center"
+                            app:backgroundTint="@color/colorPrimary"
+                            app:fabCustomSize="@dimen/record_btn_size_small"
+                            app:srcCompat="@drawable/btn_stop"
+                            app:tint="@null" />
+
+                    </LinearLayout>
+
+                </ViewSwitcher>
+
+                <TextView
+                    android:id="@+id/workout_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/waiting_location"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

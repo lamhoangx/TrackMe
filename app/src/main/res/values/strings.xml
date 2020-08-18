@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">TrackMe</string>
+    <string name="info_distance">%.2f km\nDistance</string>
+    <string name="info_noti_distance">%.2f km</string>
+    <string name="info_speed">%.2f km/h\nSpeed</string>
+    <string name="info_avg_speed">%.2f km/h\nAvg. Speed</string>
+    <string name="info_duration_format">--:--:--</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="location_permission_required">Should be grant location permission to using this features</string>
+    <string name="empty_workout_notice">Empty workout\nAdd more\n\n\n|\n|\nv</string>
+    <string name="title_activity_main">MainActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="waiting_location">Waiting location ...</string>
+
+</resources>

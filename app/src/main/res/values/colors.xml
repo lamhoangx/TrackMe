@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FF5722</color>
+    <color name="colorPrimaryDark">#952B0F</color>
+    <color name="colorAccent">#F18564</color>
+    <color name="color_polyline">#FF5722</color>
+</resources>
