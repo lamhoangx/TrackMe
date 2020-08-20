@@ -3,6 +3,13 @@
 Record outdoor workout.<br>
 App to practices with [Android Jetpack](https://developer.android.com/jetpack/components) and uses the [Kotlin](https://developer.android.com/kotlin) to develop.<br>
 
+Upcoming features
+-------
+* List history workout
+* Record workout
+* Open detail workout
+* Delete workout
+
 Screenshots
 -----------
 
@@ -40,8 +47,7 @@ Libraries Used
 Upcoming features
 -------
 
-[ ] Delete workout item
-[ ] Open workout item
+[ ] Let me know
 
 Reference
 -------
