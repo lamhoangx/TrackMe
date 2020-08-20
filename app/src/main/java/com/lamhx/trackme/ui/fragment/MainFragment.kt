@@ -5,15 +5,15 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import com.lamhx.trackme.R
 import com.lamhx.trackme.adapters.HistoryWorkoutAdapter
+import com.lamhx.trackme.adapters.OnWorkoutHistoryListener
+import com.lamhx.trackme.data.WorkoutHistory
 import com.lamhx.trackme.databinding.MainFragmentBinding
 import com.lamhx.trackme.ui.activity.RecordWorkoutActivity
 import com.lamhx.trackme.utilities.InjectorUtils
@@ -24,7 +24,7 @@ import com.lamhx.trackme.ui.viewmodels.MainViewModel
  * Main fragment
  * Present workout history and button to start record new workout
  */
-class MainFragment : Fragment() {
+class MainFragment : Fragment(), OnWorkoutHistoryListener {
 
     private lateinit var binding: MainFragmentBinding
 
@@ -42,9 +42,10 @@ class MainFragment : Fragment() {
             navigateToTrackSession()
         }
 
-        val adapter = HistoryWorkoutAdapter()
+        val adapter = HistoryWorkoutAdapter(this)
         binding.historyWorkout.adapter = adapter
         subscribeUi(adapter)
+
         return binding.root
     }
 
@@ -55,6 +56,18 @@ class MainFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         viewModel.onResume()
+    }
+
+    override fun onOpenWorkoutHistory(workoutHistory: WorkoutHistory?) {
+        workoutHistory?.let {
+
+        }
+    }
+
+    override fun onDeleteWorkoutHistory(workoutHistory: WorkoutHistory?) {
+        workoutHistory?.let {
+            viewModel.deleteWorkoutHistory(workoutHistory)
+        }
     }
 
     /**

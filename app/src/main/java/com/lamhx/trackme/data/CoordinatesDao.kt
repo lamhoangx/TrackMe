@@ -1,6 +1,7 @@
 package com.lamhx.trackme.data
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 
@@ -15,4 +16,10 @@ interface CoordinatesDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(coordinates: Coordinates)
+
+    @Delete
+    suspend fun delete(coordinates: Coordinates)
+
+    @Delete
+    suspend fun delete(coordinates: List<Coordinates>)
 }
