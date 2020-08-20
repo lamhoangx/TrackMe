@@ -15,26 +15,28 @@
         android:layout_marginLeft="2dp"
         android:layout_marginRight="2dp"
         android:layout_marginBottom="8dp"
-        app:cardCornerRadius="5dp"
+        app:cardCornerRadius="@dimen/card_corner_radius"
         app:cardElevation="2dp">
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/container_item_history"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
             <com.google.android.gms.maps.MapView
                 android:id="@+id/map_workout"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/history_map_height" />
+                android:layout_height="@dimen/history_map_height"
+                android:clickable="false"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/map_workout"
                 android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:padding="@dimen/info_padding_map">
 
@@ -72,6 +74,18 @@
                     android:textSize="@dimen/infor_text_size"
                     app:workoutDuration="@{workoutHistory.component1().duration}" />
             </LinearLayout>
-        </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/more_menu"
+                android:layout_width="@dimen/btn_more_width"
+                android:layout_height="@dimen/btn_more_height"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/round_corner"
+                android:foreground="@drawable/ripple_round_corner"
+                app:srcCompat="@drawable/ic_baseline_more_vert_24">
+
+            </ImageButton>
+
+        </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </layout>

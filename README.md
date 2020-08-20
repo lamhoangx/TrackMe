@@ -9,7 +9,7 @@ Screenshots
 ![Main screen empty](screenshots/main_screen_empty.png "Main screen empty")
 ![History workout](screenshots/main_history_workout.png "History workout")
 ![Record screen](screenshots/workout_recording.jpg "Workout recording")
-![Pause screen](screenshots/workout_pause.jpg "Workout recording")
+![Pause screen](screenshots/workout_pause.jpg "Workout pause")
 ![Notification](screenshots/notification.jpg "Workout notification")
 
 ### GoogleMap API key
@@ -38,8 +38,8 @@ Libraries Used
 Upcoming features
 -------
 
-[] Delete workout item
-[] Open workout item
+[ ] Delete workout item
+[ ] Open workout item
 
 Reference
 -------

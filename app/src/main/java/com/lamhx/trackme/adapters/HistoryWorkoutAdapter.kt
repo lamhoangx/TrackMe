@@ -1,8 +1,8 @@
 package com.lamhx.trackme.adapters
 
 import android.os.Build
-import android.view.LayoutInflater
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -24,7 +24,7 @@ import com.google.android.gms.maps.model.PolylineOptions
  * History workout adapter
  * Show workout history
  */
-class HistoryWorkoutAdapter :
+class HistoryWorkoutAdapter (private val onWorkoutHistoryListener: OnWorkoutHistoryListener) :
     ListAdapter<WorkoutHistory, RecyclerView.ViewHolder>(WorkoutDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val binding = ListItemWorkoutHistoryBinding.inflate(
@@ -32,7 +32,7 @@ class HistoryWorkoutAdapter :
             parent,
             false
         )
-        val holder = WorkoutViewHolder(binding)
+        val holder = WorkoutViewHolder(binding, onWorkoutHistoryListener)
         binding.mapWorkout.onCreate(null)
         binding.mapWorkout.onResume()
         binding.mapWorkout.getMapAsync(holder)
@@ -52,10 +52,25 @@ class HistoryWorkoutAdapter :
      * Workout holder to define layout
      */
     class WorkoutViewHolder(
-        private val binding: ListItemWorkoutHistoryBinding
-    ) : RecyclerView.ViewHolder(binding.root), OnMapReadyCallback {
-
+        private val binding: ListItemWorkoutHistoryBinding,
+        private val listener: OnWorkoutHistoryListener
+    ) : RecyclerView.ViewHolder(binding.root), OnMapReadyCallback,
+        View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {
         var googleMap: GoogleMap? = null
+        init {
+            binding.moreMenu.setOnCreateContextMenuListener(this)
+            binding.moreMenu.setOnClickListener {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    binding.moreMenu.showContextMenu(it.x, it.y)
+                } else {
+                    binding.moreMenu.showContextMenu()
+                }
+            }
+            binding.root.setOnClickListener {
+                listener.onOpenWorkoutHistory(binding.workoutHistory)
+            }
+
+        }
         fun bind(item: WorkoutHistory) {
             binding.apply {
                 //Binding data
@@ -153,7 +168,36 @@ class HistoryWorkoutAdapter :
             mapBinding()
         }
 
+        override fun onCreateContextMenu(
+            menu: ContextMenu,
+            view: View?,
+            contextMenuInfo: ContextMenu.ContextMenuInfo?
+        ) {
+            menu.add(Menu.NONE, R.id.menu_open, Menu.NONE, R.string.menu_open)
+                .setOnMenuItemClickListener(this)
+            menu.add(Menu.NONE, R.id.menu_delete, Menu.NONE, R.string.menu_delete)
+                .setOnMenuItemClickListener(this)
+        }
+
+        override fun onMenuItemClick(menuItem: MenuItem?): Boolean {
+            menuItem?.let {
+                when(it.itemId) {
+                    R.id.menu_open -> {
+                        listener.onOpenWorkoutHistory(binding.workoutHistory)
+                    }
+                    R.id.menu_delete -> {
+                        listener.onDeleteWorkoutHistory(binding.workoutHistory)
+                    }
+                }
+            }
+            return true
+        }
     }
+}
+
+interface OnWorkoutHistoryListener {
+    fun onOpenWorkoutHistory(workoutHistory: WorkoutHistory?)
+    fun onDeleteWorkoutHistory(workoutHistory: WorkoutHistory?)
 }
 
 /**
