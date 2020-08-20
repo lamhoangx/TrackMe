@@ -1,13 +1,22 @@
-TrackMe
+![Icon](screenshots/ic_launcher.png "Icon")TrackMe 
 =================
 Record outdoor workout.<br>
 App to practices with [Android Jetpack](https://developer.android.com/jetpack/components) and uses the [Kotlin](https://developer.android.com/kotlin) to develop.<br>
+
+Features
+-------
+* List history workout
+* Record workout
+* Open detail workout
+* Delete workout
 
 Screenshots
 -----------
 
 ![Main screen empty](screenshots/main_screen_empty.png "Main screen empty")
 ![History workout](screenshots/main_history_workout.png "History workout")
+![History workout options](screenshots/main_options.png "History workout")
+![History workout details](screenshots/history_workout_details.jpg "History workout")
 ![Record screen](screenshots/workout_recording.jpg "Workout recording")
 ![Pause screen](screenshots/workout_pause.jpg "Workout pause")
 ![Notification](screenshots/notification.jpg "Workout notification")
@@ -38,8 +47,7 @@ Libraries Used
 Upcoming features
 -------
 
-[ ] Delete workout item
-[ ] Open workout item
+[ ] Let me know
 
 Reference
 -------

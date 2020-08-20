@@ -10,12 +10,14 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import com.lamhx.trackme.R
 import com.lamhx.trackme.adapters.HistoryWorkoutAdapter
 import com.lamhx.trackme.adapters.OnWorkoutHistoryListener
 import com.lamhx.trackme.data.WorkoutHistory
 import com.lamhx.trackme.databinding.MainFragmentBinding
 import com.lamhx.trackme.ui.activity.RecordWorkoutActivity
+import com.lamhx.trackme.ui.activity.WorkoutHistoryActivity
 import com.lamhx.trackme.utilities.InjectorUtils
 import com.lamhx.trackme.utilities.PermissionUtils.checkSelfPermissionCompat
 import com.lamhx.trackme.ui.viewmodels.MainViewModel
@@ -60,7 +62,7 @@ class MainFragment : Fragment(), OnWorkoutHistoryListener {
 
     override fun onOpenWorkoutHistory(workoutHistory: WorkoutHistory?) {
         workoutHistory?.let {
-
+            navigateToWorkoutHistoryFragment(workoutHistory.workout.workoutId)
         }
     }
 
@@ -104,6 +106,14 @@ class MainFragment : Fragment(), OnWorkoutHistoryListener {
                 Toast.LENGTH_SHORT
             ).show()
         }
+    }
+
+    private fun navigateToWorkoutHistoryFragment(workoutId: Long) {
+ /*       val directions = MainFragmentDirections.actionMainFragmentToWorkoutHistory(workoutId)
+        findNavController().navigate(directions)*/
+        val startWorkoutHistory = Intent(requireContext(), WorkoutHistoryActivity::class.java)
+        startWorkoutHistory.putExtra(getString(R.string.argWorkoutId), workoutId)
+        requireActivity().startActivity(startWorkoutHistory)
     }
 
     /**

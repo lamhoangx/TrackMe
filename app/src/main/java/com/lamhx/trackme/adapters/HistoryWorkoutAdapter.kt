@@ -19,6 +19,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.PolylineOptions
+import com.lamhx.trackme.utilities.GoogleMapUtils
 
 /**
  * History workout adapter
@@ -75,7 +76,11 @@ class HistoryWorkoutAdapter (private val onWorkoutHistoryListener: OnWorkoutHist
             binding.apply {
                 //Binding data
                 binding.workoutHistory = item
-                mapBinding()
+                googleMap?.let {googleMap ->
+                    binding.workoutHistory?.let { workoutHistory ->
+                        GoogleMapUtils.mapBindingWorkout(googleMap, binding.root.context, workoutHistory)
+                    }
+                }
                 executePendingBindings()
             }
         }
@@ -86,74 +91,8 @@ class HistoryWorkoutAdapter (private val onWorkoutHistoryListener: OnWorkoutHist
             }
         }
 
-        fun mapBinding() {
-            if(googleMap == null) return
-
-            MapsInitializer.initialize(binding.root.context)
-            //Setup style for polyline
-            val listLocation = binding.workoutHistory!!.listLocation
-            val polylineOptions = PolylineOptions().add()
-            polylineOptions?.color(
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    binding.root.resources.getColor(R.color.color_polyline, null)
-                } else {
-                    binding.root.resources.getColor(R.color.color_polyline)
-                }
-            )
-            if(listLocation.isEmpty()) {
-                return
-            }
-
-            //Find bound rect workout on map
-            var minLat: Double = 0.toDouble()
-            var minLng: Double = 0.toDouble()
-            var maxLat: Double = 0.toDouble()
-            var maxLng: Double = 0.toDouble()
-
-            for (i in listLocation.indices) {
-                val coor = listLocation[i]
-                val latLng = LatLng(coor.latitude, coor.longitude)
-
-                polylineOptions?.add(latLng)
-                if (i == 0) {
-                    //start coor
-                    googleMap!!.addMarkerPointerToMap(binding.root.context, latLng)
-                    minLat = coor.latitude
-                    maxLat = coor.latitude
-                    minLng = coor.longitude
-                    maxLng = coor.longitude
-
-                } else {
-                    if (minLat > coor.latitude) {
-                        minLat = coor.latitude
-                    }
-                    if (minLng > coor.longitude) {
-                        minLng = coor.longitude
-                    }
-                    if (maxLat < coor.latitude) {
-                        maxLat = coor.latitude
-                    }
-                    if (maxLng < coor.longitude) {
-                        maxLng = coor.longitude
-                    }
-                }
-                if (i == listLocation.lastIndex) {
-                    //finish coor
-                    googleMap!!.addMarkerStarToMap(binding.root.context, latLng)
-                }
-                googleMap!!.addPolyline(polylineOptions)
-            }
-            //Redirect map to overview activity on map
-            googleMap!!.animateCamera(
-                CameraUpdateFactory.newLatLngBounds(
-                    LatLngBounds(LatLng(minLat, minLng), LatLng(maxLat, maxLng)),
-                    30.px
-                )
-            )
-        }
-
         override fun onMapReady(map: GoogleMap?) {
-            if(map == null) return
+            if (map == null) return
 
             MapsInitializer.initialize(binding.root.context)
             //Disable gestures to map workout history
@@ -165,7 +104,11 @@ class HistoryWorkoutAdapter (private val onWorkoutHistoryListener: OnWorkoutHist
 
             googleMap = map
 
-            mapBinding()
+            googleMap?.let {googleMap ->
+                binding.workoutHistory?.let { workoutHistory ->
+                    GoogleMapUtils.mapBindingWorkout(googleMap, binding.root.context, workoutHistory)
+                }
+            }
         }
 
         override fun onCreateContextMenu(

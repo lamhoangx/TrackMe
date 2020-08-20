@@ -12,8 +12,8 @@
         tools:layout="@layout/main_fragment">
 
         <action
-            android:id="@+id/action_main_fragment_to_track_me_session"
-            app:destination="@id/track_me_session"
+            android:id="@+id/action_main_fragment_to_workout_history"
+            app:destination="@id/workout_history_fragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -21,11 +21,21 @@
     </fragment>
 
     <fragment
+        android:id="@+id/workout_history_fragment"
+        android:name="com.lamhx.trackme.ui.fragment.WorkoutHistoryFragment"
+        tools:layout="@layout/record_workout_fragment">
+
+        <argument
+            android:name="workoutId"
+            app:argType="long"/>
+        <action
+            android:id="@+id/action_workout_history_to_main_fragment"
+            app:destination="@id/main_fragment" />
+    </fragment>
+
+    <fragment
         android:id="@+id/track_me_session"
         android:name="com.lamhx.trackme.ui.fragment.RecordWorkoutFragment"
         tools:layout="@layout/record_workout_fragment">
-        <action
-            android:id="@+id/action_track_me_session_to_main_fragment"
-            app:destination="@id/main_fragment" />
     </fragment>
 </navigation>
