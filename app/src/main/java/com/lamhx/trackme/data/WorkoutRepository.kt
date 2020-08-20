@@ -1,5 +1,6 @@
 package com.lamhx.trackme.data
 
+import androidx.lifecycle.LiveData
 import androidx.room.Transaction
 
 class WorkoutRepository(
@@ -10,6 +11,10 @@ class WorkoutRepository(
     suspend fun saveWorkout(workout: Workout, coordinates: List<Coordinates>) {
         workoutDao.insert(workout)
         coordinatesDao.insertAll(coordinates)
+    }
+
+    suspend fun getWorkoutHistory(workoutId: Long): LiveData<WorkoutHistory?> {
+        return workoutDao.getWorkoutHistory(workoutId)
     }
 
     suspend fun deleteWorkout(workoutHistory: WorkoutHistory?) {

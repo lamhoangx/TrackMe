@@ -3,6 +3,7 @@ package com.lamhx.trackme.utilities
 import android.content.res.Resources
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import com.google.android.gms.maps.MapView
 import com.lamhx.trackme.R
 
 /**
@@ -35,6 +36,7 @@ fun avgSpeed(textView: TextView?, distance: Float, duration: Long) {
         )
     }
 }
+
 
 val Int.dp: Int
     get() = (this / Resources.getSystem().displayMetrics.density).toInt()

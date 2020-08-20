@@ -31,8 +31,8 @@ interface WorkoutDao {
      * the object mapping.
      */
     @Transaction
-    @Query("SELECT * FROM workouts WHERE id = :workoutId IN (SELECT DISTINCT(workout_id) FROM coordinates) ORDER BY id DESC")
-    fun getWorkoutHistory(workoutId: Long): LiveData<WorkoutHistory>
+    @Query("SELECT * FROM workouts WHERE id = :workoutId")
+    fun getWorkoutHistory(workoutId: Long): LiveData<WorkoutHistory?>
 
     /**
      * This query will tell Room to query both the [Workout] and [Coordinates] tables and handle
